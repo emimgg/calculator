@@ -1,8 +1,9 @@
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = "";
+let secondNumber = "";
 let operator = ""; 
-let rawDisplay = [];
-let result;
+let secondOperator = "";
+let rawDisplay = "";
+let result = "";
 
 const calculator = document.querySelector(".btn-container")
 const display = document.querySelector(".display");
@@ -12,35 +13,37 @@ const btns = document.querySelectorAll(".btn");
 const equalsBtn = document.querySelector(".equals");
 const clearBtn = document.querySelector(".clear");
 
-calculator.addEventListener("click", getNumbers(), getOperator());
+calculator.addEventListener("click", getOperands(), getOperator());
 equalsBtn.addEventListener("click", () => calculate(firstNumber, secondNumber, operator));
 clearBtn.addEventListener("click", () => clear())
 
 
-function getNumbers() {
+function getOperands() {
     for (let operand of operands) {
         operand.addEventListener("click", () => {
-            printToDisplay(operand);
-            if (operator === ""){
-                firstNumber = parseFloat(firstNumber + operand.textContent);
+            if (operator === "") {
+                firstNumber += operand.textContent;
+                display.textContent = firstNumber;
             } else {
-                secondNumber = parseFloat(secondNumber + operand.textContent);
+                secondNumber += operand.textContent;
+                display.textContent = secondNumber;
             }
-        });
-    }
-}
-function getOperator() {
-    for (let symbol of operators) {
-        symbol.addEventListener("click", () => {
-            display.textContent = symbol.textContent;
-            operator = symbol.textContent;
-        }, {once : true});
+        })
     }
 }
 
-function printToDisplay(e) {
-    display.textContent += e.textContent;
-    // display.textContent = rawDisplay;
+function getOperator() {
+    for (let symbol of operators) {
+        if (operator !== "") {
+            symbol.addEventListener("click", () => {
+                secondOperator = symbol.textContent;
+            });
+        } else {
+            symbol.addEventListener("click", () => {
+                operator = symbol.textContent;
+            })
+        }
+    }   
 }
 
 function clear() {
@@ -53,7 +56,10 @@ function clear() {
 }
 
 function calculate(firstOperand, secondOperand, operator) {
-    pushToArray();
+    firstNumber = parseFloat(firstOperand);
+    secondNumber = parseFloat(secondOperand);
+
+    if (operator === "") display.textContent = firstNumber;
     switch (operator) {
         case "+":
             result = add(firstNumber, secondNumber);
@@ -66,21 +72,21 @@ function calculate(firstOperand, secondOperand, operator) {
             break;
         case "/":
             if (secondNumber === 0) {
-                result = "XD";
+                result = firstNumber;
             } else {
                 result = divide(firstNumber, secondNumber);
             }
             break;
         default:
-            result = "ERR0R";
+            result = firstNumber;
             break;
     }
     display.textContent = result;
-    firstNumber = +result;
-    secondNumber = 0;
+    firstNumber = result;
+    secondNumber = "";
     operator = "";
     result = "";
-    getOperator();
+    // getOperator();
     // console.log(rawDisplay);
 }
 
@@ -88,7 +94,7 @@ function add(a, b) {
     return a + b;
 }
 
-function substract(a, b) {
+function subtract(a, b) {
     return a - b;
 }
 
@@ -105,3 +111,31 @@ function pushToArray() {
     rawDisplay.push(operator);
     rawDisplay.push(secondNumber);
 }
+
+// function getNumbers() {
+//     for (let operand of operands) {
+//         operand.addEventListener("click", () => {
+//             if (operator === null){
+//                 firstNumber = parseFloat(firstNumber + operand.textContent);
+//                 display.textContent = firstNumber;
+//             } else {
+//                 rawDisplay = "";
+//                 secondNumber = parseFloat(secondNumber + operand.textContent);
+//                 display.textContent = secondNumber;
+//             }
+//         });
+//     }
+// }
+// function getOperator() {
+//     for (let symbol of operators) {
+//         symbol.addEventListener("click", () => {
+//             display.textContent = symbol.textContent;
+//             operator = symbol.textContent;
+//         }, {once : true});
+//     }
+// }
+
+// function printToDisplay(e) {
+//     display.textContent += e.textContent;
+//     // display.textContent = rawDisplay;
+// }
