@@ -34,18 +34,15 @@ function getOperands() {
 
 function getOperator() {
     for (let symbol of operators) {
-        if (operator !== "") {
-            symbol.addEventListener("click", () => {
-                secondOperator = symbol.textContent;
-                display.textContent = calculate(firstNumber, secondNumber, secondOperator);
-            });
-        } else {
-            symbol.addEventListener("click", () => {
-                operator = symbol.textContent;
-            })
-        }
-    }   
-}
+        symbol.addEventListener("click", () => {
+            if (operator !== "" && secondNumber !== "") {
+                calculate(firstNumber, secondNumber, operator);
+            }
+            operator = symbol.textContent;
+        });
+    };
+}   
+
 
 function clear() {
     firstNumber = "";
