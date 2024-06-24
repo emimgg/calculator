@@ -22,9 +22,9 @@ function getNumbers() {
         operand.addEventListener("click", () => {
             printToDisplay(operand);
             if (operator === ""){
-                firstNumber += operand.textContent;
+                firstNumber = parseFloat(firstNumber + operand.textContent);
             } else {
-                secondNumber += operand.textContent;
+                secondNumber = parseFloat(secondNumber + operand.textContent);
             }
         });
     }
@@ -52,27 +52,19 @@ function clear() {
     getOperator();
 }
 
-function calculate(firstNumber, secondNumber, operator) {
+function calculate(firstOperand, secondOperand, operator) {
     pushToArray();
-    if (secondNumber === "") {
-        secondNumber = 0;
-    }
-
-    firstNumber = parseFloat(firstNumber);
-    secondNumber = parseFloat(secondNumber);
-
-    if (operator == "+") result = add(firstNumber, secondNumber);
-    if (operator == "-") result = substract(firstNumber, secondNumber);
-    if (operator == "*") result = multiply(firstNumber, secondNumber);
-    if (operator == "/") result = divide(firstNumber, secondNumber);
+    if (operator == "+") result = add(firstOperand, secondOperand);
+    if (operator == "-") result = substract(firstOperand, secondOperand);
+    if (operator == "*") result = multiply(firstOperand, secondOperand);
+    if (operator == "/") result = divide(firstOperand, secondOperand);
     display.textContent = result;
-    firstNumber = result.toString();
-    secondNumber = "";
+    firstNumber = +result;
+    secondNumber = 0;
     operator = "";
-    rawDisplay = [];
+    result = "";
     getOperator();
-
-    console.log(rawDisplay);
+    // console.log(rawDisplay);
 }
 
 function add(a, b) {
