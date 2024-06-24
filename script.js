@@ -37,6 +37,7 @@ function getOperator() {
         if (operator !== "") {
             symbol.addEventListener("click", () => {
                 secondOperator = symbol.textContent;
+                display.textContent = calculate(firstNumber, secondNumber, secondOperator);
             });
         } else {
             symbol.addEventListener("click", () => {
@@ -52,42 +53,43 @@ function clear() {
     operator = "";
     result = "";
     display.textContent = "";
-    getOperator();
 }
 
 function calculate(firstOperand, secondOperand, operator) {
     firstNumber = parseFloat(firstOperand);
     secondNumber = parseFloat(secondOperand);
 
-    if (operator === "") display.textContent = firstNumber;
-    switch (operator) {
-        case "+":
-            result = add(firstNumber, secondNumber);
-            break;
-        case "-":
-            result = subtract(firstNumber, secondNumber);
-            break;
-        case "*":
-            result = multiply(firstNumber, secondNumber);
-            break;
-        case "/":
-            if (secondNumber === 0) {
+    if (isNaN(firstNumber) || isNaN(secondNumber)) {
+        display.textContent = firstNumber;
+        return;
+    } else {
+        switch (operator) {
+            case "+":
+                result = add(firstNumber, secondNumber);
+                break;
+            case "-":
+                result = subtract(firstNumber, secondNumber);
+                break;
+            case "*":
+                result = multiply(firstNumber, secondNumber);
+                break;
+            case "/":
+                if (secondNumber === 0) {
+                    result = "XD";
+                } else {
+                    result = divide(firstNumber, secondNumber);
+                }
+                break;
+            default:
                 result = firstNumber;
-            } else {
-                result = divide(firstNumber, secondNumber);
+                break;
             }
-            break;
-        default:
-            result = firstNumber;
-            break;
-    }
-    display.textContent = result;
-    firstNumber = result;
-    secondNumber = "";
-    operator = "";
-    result = "";
-    // getOperator();
-    // console.log(rawDisplay);
+            display.textContent = result.toString();
+            firstNumber = result.toString();
+            secondNumber = "";
+            operator = "";
+            // result = "";
+        }
 }
 
 function add(a, b) {
