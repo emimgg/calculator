@@ -54,10 +54,27 @@ function clear() {
 
 function calculate(firstOperand, secondOperand, operator) {
     pushToArray();
-    if (operator == "+") result = add(firstOperand, secondOperand);
-    if (operator == "-") result = substract(firstOperand, secondOperand);
-    if (operator == "*") result = multiply(firstOperand, secondOperand);
-    if (operator == "/") result = divide(firstOperand, secondOperand);
+    switch (operator) {
+        case "+":
+            result = add(firstNumber, secondNumber);
+            break;
+        case "-":
+            result = subtract(firstNumber, secondNumber);
+            break;
+        case "*":
+            result = multiply(firstNumber, secondNumber);
+            break;
+        case "/":
+            if (secondNumber === 0) {
+                result = "XD";
+            } else {
+                result = divide(firstNumber, secondNumber);
+            }
+            break;
+        default:
+            result = "ERR0R";
+            break;
+    }
     display.textContent = result;
     firstNumber = +result;
     secondNumber = 0;
