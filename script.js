@@ -85,7 +85,6 @@ function calculate(firstOperand, secondOperand, operator) {
             firstNumber = result.toString();
             secondNumber = "";
             operator = "";
-            // result = "";
         }
 }
 
@@ -104,33 +103,3 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
-
-
-
-// function getNumbers() {
-//     for (let operand of operands) {
-//         operand.addEventListener("click", () => {
-//             if (operator === null){
-//                 firstNumber = parseFloat(firstNumber + operand.textContent);
-//                 display.textContent = firstNumber;
-//             } else {
-//                 rawDisplay = "";
-//                 secondNumber = parseFloat(secondNumber + operand.textContent);
-//                 display.textContent = secondNumber;
-//             }
-//         });
-//     }
-// }
-// function getOperator() {
-//     for (let symbol of operators) {
-//         symbol.addEventListener("click", () => {
-//             display.textContent = symbol.textContent;
-//             operator = symbol.textContent;
-//         }, {once : true});
-//     }
-// }
-
-// function printToDisplay(e) {
-//     display.textContent += e.textContent;
-//     // display.textContent = rawDisplay;
-// }
