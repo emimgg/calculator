@@ -106,11 +106,7 @@ function divide(a, b) {
     return a / b;
 }
 
-function pushToArray() {
-    rawDisplay.push(firstNumber);
-    rawDisplay.push(operator);
-    rawDisplay.push(secondNumber);
-}
+
 
 // function getNumbers() {
 //     for (let operand of operands) {
