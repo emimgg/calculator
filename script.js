@@ -18,7 +18,7 @@ clearBtn.addEventListener("click", () => clear())
 function getOperands() {
     for (let operand of operands) {
         operand.addEventListener("click", () => {
-            if (display.textContent == result) {
+            if (display.textContent == result && operator === "") {
                 firstNumber = "";
                 firstNumber += operand.textContent;
                 display.textContent = firstNumber;
