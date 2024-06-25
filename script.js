@@ -76,26 +76,26 @@ function calculate(firstOperand, secondOperand, op) {
     } else {
         switch (op) {
             case "+":
-                result = add(firstNumber, secondNumber);
+                result = limitChars(add(firstNumber, secondNumber).toString());
                 break;
             case "-":
-                result = subtract(firstNumber, secondNumber);
+                result = limitChars(subtract(firstNumber, secondNumber).toString());
                 break;
             case "*":
-                result = multiply(firstNumber, secondNumber);
+                result = limitChars(multiply(firstNumber, secondNumber).toString());
                 break;
             case "/":
                 if (secondNumber === 0) {
                     result = "XD";
                 } else {
-                    result = roundDecimals(divide(firstNumber, secondNumber));
+                    result = roundDecimals(divide(firstNumber, secondNumber).toString());
                 }
                 break;
             default:
                 result = firstNumber;
                 break;
             }
-            display.textContent = `= ${result}`;
+            display.textContent = `=${result}`;
             firstNumber = result;
             secondNumber = "";
             operator = "";
@@ -129,14 +129,11 @@ function removeColorFromOperator(symbol) {
     operators.forEach(symbol => symbol.classList.remove("active-operator"));
 }
 
-// function limitChars(input) {
-//     let max = 9;
-//     if (input.length > max) {
-//         input.value = input.value.splice(0,8);
-//         return input;
-//     } else {
-//         return input;
-//     }
-    
-
-// }
+function limitChars(input) {
+    let max = 10;
+    if (input.length > max) {
+        return input.slice(0, max); 
+    } else {
+        return input;
+    }
+}
