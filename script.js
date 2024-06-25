@@ -1,15 +1,12 @@
 let firstNumber = "";
 let secondNumber = "";
 let operator = ""; 
-let secondOperator = "";
-let rawDisplay = "";
 let result = "";
 
 const calculator = document.querySelector(".btn-container")
 const display = document.querySelector(".display");
 const operands = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
-const btns = document.querySelectorAll(".btn");
 const equalsBtn = document.querySelector(".equals");
 const clearBtn = document.querySelector(".clear");
 
@@ -60,11 +57,17 @@ function clear() {
 function calculate(firstOperand, secondOperand, op) {
     firstNumber = parseFloat(firstOperand);
     secondNumber = parseFloat(secondOperand);
-
-    if (isNaN(firstNumber) || isNaN(secondNumber)) {
-        display.textContent = firstNumber;
+    if (isNaN(firstNumber)) {
+        display.textContent = display.textContent;
         secondNumber = "";
+        operator = "";
+        firstNumber = "";
         return;
+    
+    } else if (isNaN(secondNumber)) {
+            display.textContent = firstNumber;
+            secondNumber = "";
+            return;
     } else {
         switch (op) {
             case "+":
