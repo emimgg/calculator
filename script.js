@@ -36,25 +36,30 @@ function getOperands() {
 function getOperator() {
     for (let symbol of operators) {
         symbol.addEventListener("click", () => {
+            removeColorFromOperator(symbol);
             if (operator !== "" && secondNumber !== "") {
                 calculate(firstNumber, secondNumber, operator);
             }
             operator = symbol.textContent;
+            addSelectedColorToOperator(symbol);
         });
     };
 }   
 
-function clear() {
+function clear(op) {
     firstNumber = "";
     secondNumber = "";
     operator = "";
     result = "";
     display.textContent = "";
+    removeColorFromOperator(operator);
 }
 
 function calculate(firstOperand, secondOperand, op) {
     firstNumber = parseFloat(firstOperand);
     secondNumber = parseFloat(secondOperand);
+    removeColorFromOperator(op);
+
     if (isNaN(firstNumber)) {
         display.textContent = display.textContent;
         secondNumber = "";
@@ -113,4 +118,11 @@ function divide(a, b) {
 
 function roundDecimals(num) {
     return Math.round(num * 100) / 100;
-  }
+}
+
+function addSelectedColorToOperator(symbol) {
+    symbol.classList.add("active-operator");
+}
+function removeColorFromOperator(symbol) {
+    operators.forEach(symbol => symbol.classList.remove("active-operator"));
+}
