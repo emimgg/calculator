@@ -18,14 +18,13 @@ clearBtn.addEventListener("click", () => clear())
 function getOperands() {
     for (let operand of operands) {
         operand.addEventListener("click", () => {
-            if (operator === "") {
+            if (display.textContent == result) {
+                firstNumber = "";
                 firstNumber += operand.textContent;
                 display.textContent = firstNumber;
-                if (firstNumber === display.textContent) {
-                    firstNumber = "";
-                    firstNumber += operand.textContent;
-                    display.textContent = firstNumber;
-                }
+            } else if (operator === "") {
+                firstNumber += operand.textContent;
+                display.textContent = firstNumber;
             } else {
                 secondNumber += operand.textContent;
                 display.textContent = secondNumber;
@@ -44,7 +43,6 @@ function getOperator() {
         });
     };
 }   
-
 
 function clear() {
     firstNumber = "";
@@ -91,7 +89,7 @@ function calculate(firstOperand, secondOperand, op) {
                 break;
             }
             display.textContent = result;
-            firstNumber = display.textContent;
+            firstNumber = result;
             secondNumber = "";
             operator = "";
         }
