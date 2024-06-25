@@ -18,12 +18,14 @@ clearBtn.addEventListener("click", () => clear())
 function getOperands() {
     for (let operand of operands) {
         operand.addEventListener("click", () => {
-            if (display.textContent == result && operator === "") {
+            if (display.textContent === `= ${result}` && operator === "") {
                 firstNumber = "";
                 firstNumber += operand.textContent;
+                firstNumber = firstNumber;
                 display.textContent = firstNumber;
             } else if (operator === "") {
                 firstNumber += operand.textContent;
+                firstNumber = firstNumber;
                 display.textContent = firstNumber;
             } else {
                 secondNumber += operand.textContent;
@@ -93,7 +95,7 @@ function calculate(firstOperand, secondOperand, op) {
                 result = firstNumber;
                 break;
             }
-            display.textContent = result;
+            display.textContent = `= ${result}`;
             firstNumber = result;
             secondNumber = "";
             operator = "";
@@ -126,3 +128,15 @@ function addSelectedColorToOperator(symbol) {
 function removeColorFromOperator(symbol) {
     operators.forEach(symbol => symbol.classList.remove("active-operator"));
 }
+
+// function limitChars(input) {
+//     let max = 9;
+//     if (input.length > max) {
+//         input.value = input.value.splice(0,8);
+//         return input;
+//     } else {
+//         return input;
+//     }
+    
+
+// }
