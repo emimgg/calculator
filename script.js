@@ -24,6 +24,9 @@ function getOperands() {
             if (operator === "") {
                 firstNumber += operand.textContent;
                 display.textContent = firstNumber;
+                // if (result === firstNumber) {
+                    // secondNumber = parseFloat(getOperands());
+                // }
             } else {
                 secondNumber += operand.textContent;
                 display.textContent = secondNumber;
@@ -56,7 +59,7 @@ function calculate(firstOperand, secondOperand, operator) {
     firstNumber = parseFloat(firstOperand);
     secondNumber = parseFloat(secondOperand);
 
-    if (isNaN(firstNumber) || isNaN(secondNumber)) {
+    if (isNaN(result) || isNaN(secondNumber)) {
         display.textContent = firstNumber;
         return;
     } else {
@@ -74,15 +77,15 @@ function calculate(firstOperand, secondOperand, operator) {
                 if (secondNumber === 0) {
                     result = "XD";
                 } else {
-                    result = divide(firstNumber, secondNumber);
+                    result = roundDecimals(divide(firstNumber, secondNumber));
                 }
                 break;
             default:
                 result = firstNumber;
                 break;
             }
-            display.textContent = result.toString();
-            firstNumber = result.toString();
+            display.textContent = parseFloat(result.toString());
+            firstNumber = display.textContent;
             secondNumber = "";
             operator = "";
         }
@@ -103,3 +106,7 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
+
+function roundDecimals(num) {
+    return Math.round(num * 100) / 100;
+  }
