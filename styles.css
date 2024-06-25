@@ -32,7 +32,7 @@ body {
     text-align: end;
     font-size: 64px;
     padding: 0 16px;
-    font-weight: lighter;
+    font-weight: 500;
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
