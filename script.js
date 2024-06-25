@@ -55,15 +55,15 @@ function clear() {
     display.textContent = "";
 }
 
-function calculate(firstOperand, secondOperand, operator) {
+function calculate(firstOperand, secondOperand, op) {
     firstNumber = parseFloat(firstOperand);
     secondNumber = parseFloat(secondOperand);
 
-    if (isNaN(result) || isNaN(secondNumber)) {
-        display.textContent = firstNumber;
+    if (isNaN(firstNumber) || isNaN(secondNumber)) {
+        display.textContent = display.textContent;
         return;
     } else {
-        switch (operator) {
+        switch (op) {
             case "+":
                 result = add(firstNumber, secondNumber);
                 break;
@@ -84,7 +84,7 @@ function calculate(firstOperand, secondOperand, operator) {
                 result = firstNumber;
                 break;
             }
-            display.textContent = parseFloat(result.toString());
+            display.textContent = result;
             firstNumber = display.textContent;
             secondNumber = "";
             operator = "";
