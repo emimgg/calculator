@@ -24,9 +24,11 @@ function getOperands() {
             if (operator === "") {
                 firstNumber += operand.textContent;
                 display.textContent = firstNumber;
-                // if (result === firstNumber) {
-                    // secondNumber = parseFloat(getOperands());
-                // }
+                if (firstNumber === display.textContent) {
+                    firstNumber = "";
+                    firstNumber += operand.textContent;
+                    display.textContent = firstNumber;
+                }
             } else {
                 secondNumber += operand.textContent;
                 display.textContent = secondNumber;
@@ -60,7 +62,8 @@ function calculate(firstOperand, secondOperand, op) {
     secondNumber = parseFloat(secondOperand);
 
     if (isNaN(firstNumber) || isNaN(secondNumber)) {
-        display.textContent = display.textContent;
+        display.textContent = firstNumber;
+        secondNumber = "";
         return;
     } else {
         switch (op) {
